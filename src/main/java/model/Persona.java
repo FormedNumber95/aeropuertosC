@@ -2,6 +2,7 @@ package model;
 
 import java.util.Objects;
 
+// TODO: Auto-generated Javadoc
 /**
  * Clase Persona.
  */
@@ -84,7 +85,12 @@ public class Persona {
 	public int getEdad() {
 		return edad;
 	}
-	
+
+	/**
+	 * To string de una persona.
+	 *
+	 * @return El toString
+	 */
 	@Override
 	public String toString() {
 		return this.nombre+" "+this.apellidos+", "+this.edad+" años";
