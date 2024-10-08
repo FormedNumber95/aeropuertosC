@@ -128,12 +128,18 @@ public class tablaPersonasController {
     void eliminarPersona(ActionEvent event) {
     	Alert al=new Alert(AlertType.CONFIRMATION);
     	al.setHeaderText(null);
-    	al.setContentText("Estas seguro de que deseas borrar a: "+tablaPersonas.
-    			getSelectionModel().getSelectedItem());
-    	al.showAndWait();
-    	if(al.getResult().getButtonData().name().equals("OK_DONE")) {
-    		tablaPersonas.getItems().remove(tablaPersonas.getSelectionModel().
-    				getSelectedItem());
+    	if(tablaPersonas.getSelectionModel().getSelectedItem()!=null) {
+	    	al.setContentText("Estas seguro de que deseas borrar a: "+tablaPersonas.
+	    			getSelectionModel().getSelectedItem());
+	    	al.showAndWait();
+	    	if(al.getResult().getButtonData().name().equals("OK_DONE")) {
+	    		tablaPersonas.getItems().remove(tablaPersonas.getSelectionModel().
+	    				getSelectedItem());
+	    	}
+    	}else {
+    		al.setAlertType(AlertType.ERROR);
+    		al.setContentText("No hay nadie seleccionado, asi que no se puede seleccionar nadie");
+        	al.showAndWait();
     	}
     	txtApellidos.setText("");
     	txtNombre.setText("");
@@ -181,17 +187,22 @@ public class tablaPersonasController {
     	}
     	Alert al=new Alert(AlertType.INFORMATION);
     	al.setHeaderText(null);
-    	if(error.equals("")&&!existe) {
-    		tablaPersonas.getItems().set(tablaPersonas.getSelectionModel().getSelectedIndex(), p);
-    		al.setContentText("Persona modificada correctamente");
+    	if(tablaPersonas.getSelectionModel().getSelectedItem()!=null) {
+    		if(error.equals("")&&!existe) {
+	    		tablaPersonas.getItems().set(tablaPersonas.getSelectionModel().getSelectedIndex(), p);
+	    		al.setContentText("Persona modificada correctamente");
+	    	}else {
+	    		if(error.equals("")){
+	    			al.setAlertType(AlertType.WARNING);
+	    			error="La persona ya estaba en la lista";
+	    		}else {
+	    			al.setAlertType(AlertType.ERROR);
+	    		}
+	    		al.setContentText(error);
+	    	}
     	}else {
-    		if(error.equals("")){
-    			al.setAlertType(AlertType.WARNING);
-    			error="La persona ya estaba en la lista";
-    		}else {
-    			al.setAlertType(AlertType.ERROR);
-    		}
-    		al.setContentText(error);
+    		al.setAlertType(AlertType.ERROR);
+    		al.setContentText("No hay nadie seleccionado, asi que no se puede seleccionar nadie");
     	}
     	al.showAndWait();
     	txtApellidos.setText("");
