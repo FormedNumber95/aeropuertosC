@@ -2,7 +2,6 @@ package model;
 
 import java.util.Objects;
 
-// TODO: Auto-generated Javadoc
 /**
  * Clase Persona.
  */
