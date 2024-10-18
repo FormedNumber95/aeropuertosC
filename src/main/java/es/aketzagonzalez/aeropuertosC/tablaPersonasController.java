@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Persona;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Clase tablaPersonasController.
@@ -209,6 +210,20 @@ public class tablaPersonasController {
     	txtNombre.setText("");
     	txtEdad.setText("");
     	tablaPersonas.getSelectionModel().clearSelection();
+    }
+    
+    /**
+     * Añade a los textFilds los valores de la pesona seleccionada
+     * @param event
+     */
+    @FXML
+    void eventoElegir(MouseEvent event) {
+		Persona p=tablaPersonas.getSelectionModel().getSelectedItem();
+		if(p!=null) {
+			txtNombre.setText(p.getNombre());
+			txtApellidos.setText(p.getApellidos());
+			txtEdad.setText(p.getEdad()+"");
+    	}
     }
     
     /**
